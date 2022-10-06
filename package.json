@@ -2,10 +2,10 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://github.com/AndriiBeznosov/Filmoteka",
+  "homepage": "https://ammolder.github.io/GoUp-Filmoteka",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /Filmoteka/"
+    "build": "parcel build src/*.html --public-url /GoUp-Filmoteka/"
   },
   "repository": {
     "type": "git",
@@ -18,13 +18,22 @@
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
-    "modern-normalize": "^1.1.0"
+    "@glidejs/glide": "^3.6.0",
+    "axios": "^0.27.2",
+    "firebase": "^9.10.0",
+    "firebaseui": "^6.0.1",
+    "lodash.debounce": "^4.0.8",
+    "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.5",
+    "vanilla-back-to-top": "^7.2.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
+    "buffer": "^6.0.3",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "process": "^0.11.10"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }
