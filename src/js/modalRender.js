@@ -1,6 +1,7 @@
 import image1 from '../image/sample1.jpg';
 import image2 from '../image/sample2.jpg';
 import image3 from '../image/sample3.jpg';
+import imageYoutubeLogo from '../image/icons8-youtube-logo.svg';
 import {
   onClickModal,
   onQueueClick,
@@ -10,13 +11,24 @@ import {
 import { keyDown } from './modalListeners';
 
 const body = document.querySelector('body');
+
 export function modal(data) {
   const imagesStock = [image1, image2, image3];
   let randomImages = Math.floor(Math.random() * imagesStock.length);
   let images = imagesStock[randomImages];
+
+  const trailer = data.videos.results.find(video => {
+    if (video.name === 'Official Trailer') {
+      return video;
+    }
+    return data.videos.results[0];
+  });
+
   const genre = data.genres.length
     ? data.genres.map(genre => genre.name).join(', ')
     : 'Unknown';
+
+  let autoplay = 0;
 
   const modalMarckUp = `<div class="backdrop">
   
@@ -24,6 +36,13 @@ export function modal(data) {
             <button class="modal-btn" type="button" data-modal-close>
         </button>
             <div class="modal-picture">
+            <img src=${imageYoutubeLogo} alt="youtube" class="modal-image-youtube">
+            <div class="modal-iframe-overlay">
+            <button class="modal-btn-iframe"  type="button"></button>
+            </div>
+            
+            ${`<iframe class="modal-picture__image modal-iframe"  src="https://www.youtube.com/embed/${trailer.key}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>`}
             ${
               data.poster_path
                 ? `<img class="modal-picture__image" src= 
@@ -96,4 +115,15 @@ export function modal(data) {
   watchedBtn.addEventListener('click', onWatchedClick);
   const queueBtn = document.querySelector('.queue-btn');
   queueBtn.addEventListener('click', onQueueClick);
+
+  const modalBtnIframe = document.querySelector('.modal-btn-iframe');
+  const modalIframe = document.querySelector('.modal-iframe');
+
+  modalBtnIframe.addEventListener('click', () => {
+    modalIframe.style.visibility = 'visible';
+    modalIframe.setAttribute(
+      'src',
+      `https://www.youtube.com/embed/${data.videos.results[0].key}?autoplay=1`
+    );
+  });
 }
